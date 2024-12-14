@@ -105,6 +105,10 @@ public class DayReport extends AppCompatActivity {
 
     private void fetchDataFromAPI(final String zoneId, final String wardId, final String selectedDate,final String username) {
         // Making the network call on a new thread
+        if(username.isEmpty()){
+            Toast.makeText(this, "No user details, please login again!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {

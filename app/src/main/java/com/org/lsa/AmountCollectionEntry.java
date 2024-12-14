@@ -1608,6 +1608,16 @@ public class AmountCollectionEntry extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 paymentType_spinPostion = position;
+                if(amountPayingEditText.getText().toString().isEmpty()){
+                    Toast.makeText(AmountCollectionEntry.this, "Please enter no. of months and click on calculate to pay", Toast.LENGTH_SHORT).show();
+                    payment_reference_no_entry_edt.requestFocus();
+                    return;
+                }
+                if(monthsPayingEditText.getText().toString().equals("0")){
+                    Toast.makeText(AmountCollectionEntry.this, "Number of months is 0", Toast.LENGTH_SHORT).show();
+                    payment_reference_no_entry_edt.requestFocus();
+                    return;
+                }
                 if (paymentType_spinPostion > 0) {
                     paymentType_spinSelectedSeasonCode =
                             paymentTypeCodeList.get(paymentType_spinPostion);
