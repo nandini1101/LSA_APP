@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "443188388892",
+    "project_id": "lsa-payments",
+    "storage_bucket": "lsa-payments.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443188388892:android:47bca6ad7040948a976bd9",
+        "android_client_info": {
+          "package_name": "com.org.lsa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIonpwBF7-BCLImnIAQyGxInmWHktzqWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

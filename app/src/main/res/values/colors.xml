@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#E21F27</color>
+    <color name="lsa_btn_bg">#C40F08</color>
+
+    <color name="lsa_grey">#EDEDED</color>
+    <color name="lsa_grey_views_border">#CDCDCD</color>
+    <color name="lsa_heading_bg">#FEE191</color>
+
+    <color name="color_grey">#CDC9C9</color>
+    <color name="color_grey1">#DCD4D4</color>
+    <color name="color_warm_grey">#979797</color>
+    <color name="color_brown_grey">#999999</color>
+    <color name="color_brownish_grey_two">#666666</color>
+    <color name="color_error">#f15454</color>
+
+
+    <color name="header_color">#e21e26</color>
+</resources>

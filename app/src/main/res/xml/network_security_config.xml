@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <base-config cleartextTrafficPermitted="true" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">ramkyapi.beulahsoftware.com/api</domain>
+        <domain tools:ignore="NetworkSecurityConfig">45.114.246.201</domain>
+        <!-- <domain includeSubdomains="true">registration.telangana.gov.in
+         </domain>-->
+        <trust-anchors>
+            <!--            <certificates src="system"/>-->
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
