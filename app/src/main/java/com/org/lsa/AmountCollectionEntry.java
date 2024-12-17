@@ -150,7 +150,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
 
     String zoneId, wardId, zoneName, wardName, status;
 
-    boolean isSuccess = false;
+    boolean authorized = false;
 
 //    private Button goBackButton;
 
@@ -1349,7 +1349,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
             }
         }
         else if(paymentTypeSelection.equalsIgnoreCase("SMS Link") || paymentTypeSelection.equalsIgnoreCase("Dynamic QR") || paymentTypeSelection.equalsIgnoreCase("Card")){
-            if(!isSuccess || status.equals("fail")){
+            if(!authorized || status.equals("fail")){
                 showToastMessage("Razorpay payment failed..!");
                 return;
             }
@@ -1960,7 +1960,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         displayStatus.setVisibility(View.VISIBLE);
         if(status.equals("success")){
             Log.d("Log", "Successssssss");
-            isSuccess = true;
+            authorized = true;
         }
         displayStatus.setText("Payment "+status);
         hide_qrCodePayment_linear.setVisibility(View.GONE);
@@ -2000,7 +2000,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         displayStatus.setVisibility(View.VISIBLE);
         if(status.equals("success")){
             Log.d("Log", "Successssssss");
-            isSuccess = true;
+            authorized = true;
         }
         displayStatus.setText("Payment "+status);
         hide_qrCodePayment_linear.setVisibility(View.GONE);
@@ -2025,7 +2025,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         displayStatus.setVisibility(View.VISIBLE);
         if(status.equals("success")){
             Log.d("Log", "Successssssss");
-            isSuccess = true;
+            authorized = true;
         }
         displayStatus.setText("Payment "+status);
         hide_qrCodePayment_linear.setVisibility(View.GONE);
