@@ -173,7 +173,7 @@ public class AmountCollection extends AppCompatActivity {
                     // Build the URL with query parameters
                     // http://45.114.246.137:85/api/PaymentsDetails/GetCitizenForPayment?ZoneId=1&houseNo=%20&name=a&mobileNo=9
                     String apiUrl = "http://45.114.246.201:6005/api/PaymentsDetails/GetCitizenForPayment?ZoneId="+ zoneId +"&WardNo="+wardId+"&houseNo="+houseNumber+"&name="+name+"&mobileNo="+phoneNumber;
-                    Log.d("Citizen","Citizen response "+apiUrl);
+//                    Log.d("Citizen","Citizen response "+apiUrl);
                     // Make a GET request to the API
                     URL url = new URL(apiUrl);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -184,7 +184,7 @@ public class AmountCollection extends AppCompatActivity {
 
                     int responseCode = httpURLConnection.getResponseCode();
 
-                    Log.d("Citizen","Citizen response "+responseCode);
+//                    Log.d("Citizen","Citizen response "+responseCode);
 
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         StringBuilder response = new StringBuilder();
@@ -200,7 +200,7 @@ public class AmountCollection extends AppCompatActivity {
                             public void run() {
                                 try {
 
-                                    Log.d("API","Response data "+response.toString());
+//                                    Log.d("API","Response data "+response.toString());
                                     TextView tvNoDataFound = findViewById(R.id.tv_no_data_found);
 
                                     String cleaned = response.toString().trim();
@@ -218,7 +218,7 @@ public class AmountCollection extends AppCompatActivity {
                                         Type listType = new TypeToken<List<SurveyDataModel>>(){}.getType();
                                         List<SurveyDataModel> apiDataList = gson.fromJson(response.toString(), listType);
 
-                                        Log.d("API","Response data "+apiDataList.toString());
+//                                        Log.d("API","Response data "+apiDataList.toString());
 
                                         for(SurveyDataModel sd:apiDataList){
                                             System.out.println(sd.getOwnerName()+" "+sd.getSDId()+" "+sd.getZoneId()+" "+sd.getDefault_months()+" "+sd.getTotal_Outstadnding_amount()+" "+sd.getEstablishmentType());
@@ -336,7 +336,7 @@ public class AmountCollection extends AppCompatActivity {
         // below line we are creating a new array list
         courseModelArrayList = new ArrayList<SurveyDataModel>();
 
-        Log.d("AmountCollection", "courseModelArrayList.size(): " + courseModelArrayList.size());
+//        Log.d("AmountCollection", "courseModelArrayList.size(): " + courseModelArrayList.size());
 
         // initializing our adapter class.
         adapter = new CourseAdapter(courseModelArrayList, AmountCollection.this);

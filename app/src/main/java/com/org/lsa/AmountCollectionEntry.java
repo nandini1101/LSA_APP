@@ -234,7 +234,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         Intent intent = getIntent();
         SD_idStr = intent.getIntExtra("SD_id",0);
         wardId = String.valueOf(intent.getIntExtra("wardNo",0));
-        Log.d(TAG, "SD_idStr : " + SD_idStr);
+//        Log.d(TAG, "SD_idStr : " + SD_idStr);
 
         loadPaymentHistory(SD_idStr);
 
@@ -245,7 +245,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         owner_nameStr = intent.getStringExtra("owner_name");
         owner_contactStr = intent.getStringExtra("owner_contact");
         establishmentStr = intent.getStringExtra("establishmentType");
-        Log.d("Establishment","Establishment type "+establishmentStr);
+//        Log.d("Establishment","Establishment type "+establishmentStr);
         addressStr = intent.getStringExtra("address");
         zoneId = intent.getStringExtra("zoneId");
 
@@ -381,7 +381,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 conn.setDoOutput(false);
 
                 int responseCode = conn.getResponseCode();
-                Log.d("Debug", "Response code " + responseCode + " response " + conn.getResponseMessage() + " URL " + conn.getURL());
+//                Log.d("Debug", "Response code " + responseCode + " response " + conn.getResponseMessage() + " URL " + conn.getURL());
 
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream is = conn.getInputStream();
@@ -1186,7 +1186,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
     private Boolean ownerNumberEditFlag = false;
 
     private void validateSubmittingData() {
-        Log.d("API","Clicked submit button");
+//        Log.d("API","Clicked submit button");
         if (ownerNumberEditFlag) {
             if (!this.owner_contact_entry_edt.getText().toString().trim().matches("^[6789]\\d{9}$")) {
                 showToastMessage("Please Enter Valid Owner Number ..!");
@@ -1423,7 +1423,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
             fos.write(decodedString);
             fos.flush();
             fos.close();
-            Log.d("API","Converted to image from base64");
+//            Log.d("API","Converted to image from base64");
             return file;
         } catch (IOException e) {
             e.printStackTrace();
@@ -1445,14 +1445,14 @@ public class AmountCollectionEntry extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private void callSubmitAmountCollectionData() {
-        Log.d("API","Called submit call amount data function");
+//        Log.d("API","Called submit call amount data function");
 
         progressDialog = new ProgressDialog(AmountCollectionEntry.this);
         progressDialog.setMessage("Submitting Data to server...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
         progressDialog.show();
-        Log.d("API","Called submit call amount data function");
+//        Log.d("API","Called submit call amount data function");
 
 
         String paymentDate = "";
@@ -1509,12 +1509,12 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 .addFormDataPart("UpdateType", updateType);
 
         if (imageFile != null) {
-            Log.d("API","Image present");
+//            Log.d("API","Image present");
             multipartBuilder.addFormDataPart("paymentReceiptImage", imageFile.getName(),
                     RequestBody.create(MediaType.parse("image/*"), imageFile));
         }
 
-        Log.d("API","Form data "+multipartBuilder);
+//        Log.d("API","Form data "+multipartBuilder);
 
         MultipartBody requestBody = multipartBuilder.build();
         Request request = new Request.Builder()
@@ -1535,9 +1535,9 @@ public class AmountCollectionEntry extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 runOnUiThread(() -> {
-                    Log.d("API", "response " + response.code());
-                    Log.d("API", "response " + response.message());
-                    Log.d("API", "response " + response);
+//                    Log.d("API", "response " + response.code());
+//                    Log.d("API", "response " + response.message());
+//                    Log.d("API", "response " + response);
                     progressDialog.dismiss();
                     if (response.isSuccessful()) {
                         Toast.makeText(AmountCollectionEntry.this, "Successfully Submitted...", Toast.LENGTH_SHORT).show();
@@ -1745,8 +1745,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
 
                 if (requestCode == TAKE_PICTURE_ONE) {
                     if (Utility.showLogs == 0) {
-                        Log.d(TAG, "resultCode QR " + resultCode + " data " + data);
-                        Log.d(TAG, " Utility.imageFilePath QR " + Utility.imageFilePath);
+//                        Log.d(TAG, "resultCode QR " + resultCode + " data " + data);
+//                        Log.d(TAG, " Utility.imageFilePath QR " + Utility.imageFilePath);
                     }
                     try {
                         photoCalVal = 0;
@@ -1778,8 +1778,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 if (requestCode == TAKE_PICTURE_CHEQUE) {
 
                     if (Utility.showLogs == 0) {
-                        Log.d(TAG, "resultCode " + resultCode + " data " + data);
-                        Log.d(TAG, " Utility.imageFilePath " + Utility.imageFilePath);
+//                        Log.d(TAG, "resultCode " + resultCode + " data " + data);
+//                        Log.d(TAG, " Utility.imageFilePath " + Utility.imageFilePath);
                     }
                     try {
                         photoCalVal = 1;
@@ -1810,8 +1810,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 if (requestCode == TAKE_PICTURE_DD) {
 
                     if (Utility.showLogs == 0) {
-                        Log.d(TAG, "resultCode DD " + resultCode + " data " + data);
-                        Log.d(TAG, " Utility.imageFilePath DD " + Utility.imageFilePath);
+//                        Log.d(TAG, "resultCode DD " + resultCode + " data " + data);
+//                        Log.d(TAG, " Utility.imageFilePath DD " + Utility.imageFilePath);
                     }
                     try {
                         photoCalVal = 3;
@@ -1842,8 +1842,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 if (requestCode == TAKE_PICTURE_NEFT) {
 
                     if (Utility.showLogs == 0) {
-                        Log.d(TAG, "resultCode NEFT " + resultCode + " data " + data);
-                        Log.d(TAG, " Utility.imageFilePath NEFT " + Utility.imageFilePath);
+//                        Log.d(TAG, "resultCode NEFT " + resultCode + " data " + data);
+//                        Log.d(TAG, " Utility.imageFilePath NEFT " + Utility.imageFilePath);
                     }
                     try {
                         photoCalVal = 4;
@@ -1874,8 +1874,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 if (requestCode == TAKE_PICTURE_RTGS) {
 
                     if (Utility.showLogs == 0) {
-                        Log.d(TAG, "resultCode RTGS " + resultCode + " data " + data);
-                        Log.d(TAG, "RTGS Utility.imageFilePath " + Utility.imageFilePath);
+//                        Log.d(TAG, "resultCode RTGS " + resultCode + " data " + data);
+//                        Log.d(TAG, "RTGS Utility.imageFilePath " + Utility.imageFilePath);
                     }
                     try {
                         photoCalVal = 5;

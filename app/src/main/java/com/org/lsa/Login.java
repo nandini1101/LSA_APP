@@ -275,14 +275,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             jsonPayload.put("PasswordHash", passwordHash);
             jsonPayload.put("OTP", otp);
 
-            Log.d("VerifyPassword", "response code " + jsonPayload);
+//            Log.d("VerifyPassword", "response code " + jsonPayload);
 
             OutputStream os = httpURLConnection.getOutputStream();
             os.write(jsonPayload.toString().getBytes(StandardCharsets.UTF_8));
             os.close();
 
             int responseCode = httpURLConnection.getResponseCode();
-            Log.d("VerifyPassword", "response code " + responseCode);
+//            Log.d("VerifyPassword", "response code " + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));

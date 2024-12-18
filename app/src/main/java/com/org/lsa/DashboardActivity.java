@@ -175,8 +175,8 @@ public class DashboardActivity extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedWard = parent.getItemAtPosition(position).toString();
 
-                Log.d("Location", "Selected ward " + selectedWard);
-                Log.d("Location", "Selected ward map " + wardMap);
+//                Log.d("Location", "Selected ward " + selectedWard);
+//                Log.d("Location", "Selected ward map " + wardMap);
 
                 if(selectedWard.equals("Select ward")){
                     wardName = "Selected";
@@ -187,9 +187,9 @@ public class DashboardActivity extends AppCompatActivity
                 if (!selectedWard.equals("Select ward")) {
                     wardName = selectedWard;
                     wardId = wardMap.get(selectedWard);
-                    Log.d("Location", "Selected ward id " + wardId);
+//                    Log.d("Location", "Selected ward id " + wardId);
                     if (wardId != null) {
-                        Log.d("Location", wardId);
+//                        Log.d("Location", wardId);
                         getSummeryForWard(zoneId,wardId);
                     }
                 }
@@ -199,6 +199,8 @@ public class DashboardActivity extends AppCompatActivity
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        LogcatHelper.captureLogs(this, "all_logs.txt");
 
         this.mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -387,7 +389,7 @@ public class DashboardActivity extends AppCompatActivity
                     //String authString = "patna:patna#2020";
                     //String encodeToString = Base64.encodeToString(authString.getBytes(StandardCharsets.UTF_8), Base64.NO_WRAP);
 
-                    Log.d("API", url.toString());
+//                    Log.d("API", url.toString());
                     //httpURLConnection.setRequestProperty("Authorization", "Basic " + encodeToString);
                     httpURLConnection.setRequestProperty("Accept", "*/*");
                     httpURLConnection.setRequestMethod("GET");
@@ -395,7 +397,7 @@ public class DashboardActivity extends AppCompatActivity
 
 
                     int responseCode = httpURLConnection.getResponseCode();
-                    Log.d("API", "response code: " + responseCode);
+//                    Log.d("API", "response code: " + responseCode);
 
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         StringBuilder response = new StringBuilder();
@@ -457,7 +459,7 @@ public class DashboardActivity extends AppCompatActivity
                 String zoneId = jsonObject.getString("uccZoneId");
                 String zoneName = jsonObject.getString("zoneName");
                 List<String> notNeeded = new ArrayList<>(Arrays.asList("2", "5", "8"));
-//              List<String> notNeeded = new ArrayList<>(Arrays.asList("5", "8")); //Testing
+//                List<String> notNeeded = new ArrayList<>(Arrays.asList("5", "8")); //Testing
                 if(!notNeeded.contains(zoneId)){
                     zoneMap.put(zoneName, zoneId);
                     zoneList.add(zoneName);
@@ -549,7 +551,7 @@ public class DashboardActivity extends AppCompatActivity
             List<String> wardList = new ArrayList<>();
             wardList.add("Select ward");
 
-            Log.d("Location", "Wards string " + responseString);
+//            Log.d("Location", "Wards string " + responseString);
             JSONArray jsonArray = new JSONArray(responseString.replace("\\\\", ""));
             if (jsonArray.length() <= 0) {
                 Toast.makeText(this, "No Ward Data!", Toast.LENGTH_SHORT).show();
