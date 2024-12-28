@@ -60,6 +60,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.eze.api.EzeAPI;
 
@@ -821,8 +822,12 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 JSONObject jsonReferences = new JSONObject();
                 JSONArray additionalReferences = new JSONArray();
                 try {
-                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+//                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                    long timePart = System.currentTimeMillis(); // Current time in milliseconds
+                    long randomPart = ThreadLocalRandom.current().nextInt(1_000, 10_000); // Random 4 digits
+                    long number = timePart * 10_000 + randomPart;
                     jsonReferences.put("reference1", number);
+
 
                     additionalReferences.put("Paying using UPI");
                     additionalReferences.put("LSA payment");
@@ -872,7 +877,10 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 JSONObject jsonReferences = new JSONObject();
                 JSONArray additionalReferences = new JSONArray();
                 try {
-                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+//                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                    long timePart = System.currentTimeMillis(); // Current time in milliseconds
+                    long randomPart = ThreadLocalRandom.current().nextInt(1_000, 10_000); // Random 4 digits
+                    long number = timePart * 10_000 + randomPart;
                     jsonReferences.put("reference1", number);
 
                     additionalReferences.put("Paying using QR code");
@@ -917,7 +925,10 @@ public class AmountCollectionEntry extends AppCompatActivity {
                 JSONObject jsonReferences = new JSONObject();
                 JSONArray additionalReferences = new JSONArray();
                 try {
-                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+//                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                    long timePart = System.currentTimeMillis(); // Current time in milliseconds
+                    long randomPart = ThreadLocalRandom.current().nextInt(1_000, 10_000); // Random 4 digits
+                    long number = timePart * 10_000 + randomPart;
                     jsonReferences.put("reference1", number);
 
                     additionalReferences.put("Paying using QR code");
@@ -955,7 +966,10 @@ public class AmountCollectionEntry extends AppCompatActivity {
 
             JSONObject jsonReferences = new JSONObject();
             try {
-                long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+//                long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                long timePart = System.currentTimeMillis(); // Current time in milliseconds
+                long randomPart = ThreadLocalRandom.current().nextInt(1_000, 10_000); // Random 4 digits
+                long number = timePart * 10_000 + randomPart;
                 jsonReferences.put("reference1", number);
                 JSONArray additionalReferences = new JSONArray();
                 additionalReferences.put("Paying using card");
@@ -1362,6 +1376,10 @@ public class AmountCollectionEntry extends AppCompatActivity {
             return;
         }
 
+        long timePart = System.currentTimeMillis(); // Current time in milliseconds
+        long randomPart = ThreadLocalRandom.current().nextInt(1_000, 10_000); // Random 4 digits
+        long number = timePart * 10_000 + randomPart;
+
         if (photoCalVal == 0) {
             sendImgStr = photoBase64Str;
             sendTransactionNoStr_QR = payment_reference_no_entry_edt.getText().toString().trim();
@@ -1371,27 +1389,35 @@ public class AmountCollectionEntry extends AppCompatActivity {
             sendTransactionNoStr = cheque_number_edt.getText().toString().trim();
             sendBankNameStr = paymentChequeBankName_entry_edt.getText().toString().trim();
             sendBankDateStr = formattedDateTime_chq;
+            sendTransactionNoStr_QR = String.valueOf(number);
         } else if (photoCalVal == 3) {
             sendImgStr = photoBase64DDStr;
             sendTransactionNoStr = dd_number_edt.getText().toString().trim();
             sendBankNameStr = paymentddBankName_entry_edt.getText().toString().trim();
             sendBankDateStr = formattedDateTime_dd;
+            sendTransactionNoStr_QR = String.valueOf(number);
         } else if (photoCalVal == 4) {
             sendImgStr = photoBase64NEFTStr;
             sendTransactionNoStr = neft_number_edt.getText().toString().trim();
             sendBankNameStr = paymentneftBankName_entry_edt.getText().toString().trim();
             sendBankDateStr = formattedDateTime_neft;
+            sendTransactionNoStr_QR = String.valueOf(number);
         } else if (photoCalVal == 5) {
             sendImgStr = photoBase64RGTSStr;
             sendTransactionNoStr = rtgs_number_edt.getText().toString().trim();
             sendBankNameStr = paymentrtgsBankName_entry_edt.getText().toString().trim();
             sendBankDateStr = formattedDateTime_rtgs;
+            sendTransactionNoStr_QR = String.valueOf(number);
+        }
+
+        if(sendTransactionNoStr_QR.isEmpty()){
+            sendTransactionNoStr_QR = String.valueOf(number);
         }
 
         System.out.println("Image url " + sendImgStr + " " + sendTransactionNoStr + " " + sendBankNameStr);
 
 
-        new AlertDialog.Builder(AmountCollectionEntry.this)
+        /*new AlertDialog.Builder(AmountCollectionEntry.this)
                 .setTitle("Print Receipt")
                 .setMessage("Do you want to print the receipt for the user?")
                 .setPositiveButton("Print", (dialog, which) -> {
@@ -1409,8 +1435,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
                     callSubmitAmountCollectionData();
                 })
                 .create()
-                .show();
-
+                .show();*/
+        callSubmitAmountCollectionData();
 
     }
 
@@ -1534,7 +1560,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                runOnUiThread(() -> {
+                /*runOnUiThread(() -> {
 //                    Log.d("API", "response " + response.code());
 //                    Log.d("API", "response " + response.message());
 //                    Log.d("API", "response " + response);
@@ -1551,7 +1577,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
                         intent.putExtra("zoneName", zoneName);
                         intent.putExtra("wardId", wardId);
                         intent.putExtra("wardName", wardName);
-                        startActivity(intent);*/
+                        startActivity(intent);
                         Intent intent = new Intent(AmountCollectionEntry.this, DashboardActivity.class);
                         intent.putExtra("zoneName", zoneName);
                         intent.putExtra("wardName", wardName);
@@ -1561,10 +1587,119 @@ public class AmountCollectionEntry extends AppCompatActivity {
                     } else {
                         Toast.makeText(AmountCollectionEntry.this, "Failed to submit data with code " + response.code() + ", " + response.message(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
+                Log.d("API", "response " + response.code());
+                    Log.d("API", "response " + response.message());
+                    Log.d("API", "response " + response);
+                if (response.isSuccessful()) {
+                    // Fetch the Receipt ID
+                    fetchReceiptIDAndSendOTP();
+                } else {
+                    runOnUiThread(() -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(AmountCollectionEntry.this, "Failed to submit data with code " + response.code() + ", " + response.message(), Toast.LENGTH_SHORT).show();
+                    });
+                }
             }
         });
 
+    }
+
+    private void fetchReceiptIDAndSendOTP() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(api_key + "/PrintReceipt/" + sendTransactionNoStr_QR)
+                .get()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(AmountCollectionEntry.this, "Failed to fetch receipt data", Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+//                        Log.d("API",response.body().string());
+
+                        String responseBody = response.body().string();
+
+                        String receiptID = "";
+                        if (responseBody.startsWith("Receipt ID:")) {
+                            receiptID = responseBody.substring(responseBody.indexOf(":") + 1).trim();
+                        } else {
+                            Log.e("API", "Unexpected response format: " + responseBody);
+                        }
+
+                        sendOTPReceipt(receiptID);
+                    } catch (Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(AmountCollectionEntry.this, "Data saved to database, but cannot retrieve data!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                } else {
+                    runOnUiThread(() -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(AmountCollectionEntry.this, "Failed to fetch receipt data with code " + response.code(), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+        });
+    }
+
+    private void sendOTPReceipt(String receiptID) {
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put("PaymentId", receiptID);
+            postData.put("Amount", fin_amount);
+//            postData.put("PhoneNumber", owner_contactStr);
+            postData.put("PhoneNumber", "9718775851");
+            postData.put("ModeOfPayment", paymentTypeSelection);
+
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), postData.toString());
+            Request request = new Request.Builder()
+                    .url(api_key + "/api/PaymentsDetails/SendOTPReceipt")
+                    .post(requestBody)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                    runOnUiThread(() -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(AmountCollectionEntry.this, "Failed to send OTP receipt", Toast.LENGTH_SHORT).show();
+                    });
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    runOnUiThread(() -> {
+                        progressDialog.dismiss();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(AmountCollectionEntry.this, "Successfully Submitted and Message Sent to user!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AmountCollectionEntry.this, DashboardActivity.class);
+                            intent.putExtra("zoneName", zoneName);
+                            intent.putExtra("wardName", wardName);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(AmountCollectionEntry.this, "Failed to send OTP receipt with code " + response.code(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showToastMessage(String message) {

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">LSA Payment</string>
 
-    <string name="submit">Submit</string>
+    <string name="submit">Save &amp; Submit</string>
     <string name="edit">Edit</string>
     <string name="bank_qr_code">Show Bank QR code</string>
     <string name="bank_qr_code_ref_number">Reference Number*</string>

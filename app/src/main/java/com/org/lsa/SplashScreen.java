@@ -35,8 +35,8 @@ public class SplashScreen extends AppCompatActivity {
 
                         SharedPreferences prefs = Utility.getSharedPreferences(SplashScreen.this);
                         String status = prefs.getString("status", "");
-                        if(status.equals("1")){
-//                        if(true){ //Testing
+//                        if(status.equals("1")){
+                        if(true){ //Testing
                             startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
                         }
                         else{

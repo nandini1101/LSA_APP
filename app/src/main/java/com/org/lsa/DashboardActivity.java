@@ -458,8 +458,8 @@ public class DashboardActivity extends AppCompatActivity
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String zoneId = jsonObject.getString("uccZoneId");
                 String zoneName = jsonObject.getString("zoneName");
-                List<String> notNeeded = new ArrayList<>(Arrays.asList("2", "5", "8"));
-//                List<String> notNeeded = new ArrayList<>(Arrays.asList("5", "8")); //Testing
+//                List<String> notNeeded = new ArrayList<>(Arrays.asList("2", "5", "8"));
+                List<String> notNeeded = new ArrayList<>(Arrays.asList("5", "8")); //Testing
                 if(!notNeeded.contains(zoneId)){
                     zoneMap.put(zoneName, zoneId);
                     zoneList.add(zoneName);
