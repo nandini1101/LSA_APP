@@ -1417,7 +1417,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         System.out.println("Image url " + sendImgStr + " " + sendTransactionNoStr + " " + sendBankNameStr);
 
 
-        /*new AlertDialog.Builder(AmountCollectionEntry.this)
+        new AlertDialog.Builder(AmountCollectionEntry.this)
                 .setTitle("Print Receipt")
                 .setMessage("Do you want to print the receipt for the user?")
                 .setPositiveButton("Print", (dialog, which) -> {
@@ -1435,8 +1435,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
                     callSubmitAmountCollectionData();
                 })
                 .create()
-                .show();*/
-        callSubmitAmountCollectionData();
+                .show();
+//        callSubmitAmountCollectionData();
 
     }
 
@@ -1659,8 +1659,8 @@ public class AmountCollectionEntry extends AppCompatActivity {
         try {
             postData.put("PaymentId", receiptID);
             postData.put("Amount", fin_amount);
-//            postData.put("PhoneNumber", owner_contactStr);
-            postData.put("PhoneNumber", "9718775851");
+            postData.put("PhoneNumber", owner_contactStr);
+//            postData.put("PhoneNumber", "9718775851");
             postData.put("ModeOfPayment", paymentTypeSelection);
 
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), postData.toString());
