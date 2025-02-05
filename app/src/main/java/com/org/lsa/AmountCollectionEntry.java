@@ -2820,23 +2820,23 @@ public class AmountCollectionEntry extends AppCompatActivity {
             int estimatedHeight = y;
 
             // Pre-calculate height for dynamic content
-            estimatedHeight += lineSpacing * 3; // For header
-            estimatedHeight += lineSpacing; // For dashed line
-            estimatedHeight += lineSpacing * 2; // For Tollfree text and dashed line
+//            estimatedHeight += lineSpacing * 3; // For header
+//            estimatedHeight += lineSpacing; // For dashed line
+//            estimatedHeight += lineSpacing * 2; // For Tollfree text and dashed line
             estimatedHeight += calculateKeyValueHeight("Trans Date", currentDate, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("Trans No", transactionId, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Consumer No", consumerNumber, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Zone", zoneNumber, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Ward", wardName, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Consumer No", consumerNumber, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Zone", zoneNumber, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Ward", wardName, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("House No", houseNumber, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("Name", name, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Mobile No", mobileNumber, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Address", address, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Dues From", duesFrom, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Dues Upto", duesUpto, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += calculateKeyValueHeight("Payment Mode", paymentMode, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Mobile No", mobileNumber, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Address", address, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Dues From", duesFrom, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Dues Upto", duesUpto, paint, bitmapWidth, lineSpacing);
+//            estimatedHeight += calculateKeyValueHeight("Payment Mode", paymentMode, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("Amount Paid", "Rs. " + amountPaid, paint, bitmapWidth, lineSpacing);
-            estimatedHeight += lineSpacing * 7; // Footer
+//            estimatedHeight += lineSpacing * 7; // Footer
 
             // Create Bitmap with calculated height
             Bitmap receiptBitmap = Bitmap.createBitmap(bitmapWidth, estimatedHeight, Bitmap.Config.ARGB_8888);
@@ -2844,7 +2844,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
             canvas.drawColor(Color.WHITE);
 
             // Draw Header
-            paint.setTextSize(24);
+            /*paint.setTextSize(24);
             paint.setTypeface(Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD));
             drawCenteredText(canvas, "Lucknow Municipal Corporation", paint, y, lineSpacing);
             y += lineSpacing;
@@ -2865,24 +2865,24 @@ public class AmountCollectionEntry extends AppCompatActivity {
 
             // Dashed line below Tollfree
             drawDashedLine(canvas, paint, bitmapWidth, y);
-            y += lineSpacing;
+            y += lineSpacing;*/
 
             // Draw Key-Value Pairs
             y = drawKeyValue(canvas, "Trans Date", currentDate, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "Trans No", transactionId, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Consumer No", consumerNumber, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Zone", zoneNumber, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Ward", wardName, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Consumer No", consumerNumber, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Zone", zoneNumber, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Ward", wardName, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "House No", houseNumber, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "Name", name, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Mobile No", mobileNumber, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Address", address, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Dues From", duesFrom, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Dues Upto", duesUpto, paint, bitmapWidth, y, lineSpacing);
-            y = drawKeyValue(canvas, "Payment Mode", paymentMode, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Mobile No", mobileNumber, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Address", address, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Dues From", duesFrom, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Dues Upto", duesUpto, paint, bitmapWidth, y, lineSpacing);
+//            y = drawKeyValue(canvas, "Payment Mode", paymentMode, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "Amount Paid", "Rs. " + amountPaid, paint, bitmapWidth, y, lineSpacing);
 
-            drawDashedLine(canvas, paint, bitmapWidth, y);
+            /*drawDashedLine(canvas, paint, bitmapWidth, y);
             y += lineSpacing;
 
             y = drawKeyValue(canvas, "TC Name", collectorName, paint, bitmapWidth, y, lineSpacing);
@@ -2898,7 +2898,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
             y += lineSpacing;
             drawCenteredText(canvas, "https://www.lucknowsmartcity.com", paint, y, lineSpacing);
             y += lineSpacing;
-            drawCenteredText(canvas, "Thank you!", paint, y, lineSpacing);
+            drawCenteredText(canvas, "Thank you!", paint, y, lineSpacing);*/
 
             // Encode and Print
             String encodedImage = getEncoded64ImageStringFromBitmap(receiptBitmap);
@@ -2942,10 +2942,15 @@ public class AmountCollectionEntry extends AppCompatActivity {
     }
 
     private String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        /*ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.NO_WRAP); // Use NO_WRAP to avoid unwanted characters
+        return Base64.encodeToString(byteArray, Base64.NO_WRAP); // Use NO_WRAP to avoid unwanted characters*/
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] byteFormat = stream.toByteArray();
+        return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
     }
 
     // Updated drawKeyValue
