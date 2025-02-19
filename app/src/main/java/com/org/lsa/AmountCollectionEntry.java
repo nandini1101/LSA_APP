@@ -322,6 +322,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         });
 
         show_bank_qr_code_entry_txt = findViewById(R.id.show_bank_qr_code_entry_txt);
+        show_bank_qr_code_entry_txt.setVisibility(View.GONE);
         show_bank_qr_code_entry_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1718,20 +1719,20 @@ public class AmountCollectionEntry extends AppCompatActivity {
         paymentTypeNameList = new ArrayList<>();
         paymentTypeNameList.add("Select");
 
-        paymentTypeNameList.add("QR CODE");
-        paymentTypeCodeList.add("1");
+//        paymentTypeNameList.add("QR CODE");
+//        paymentTypeCodeList.add("1");
         paymentTypeNameList.add("CHEQUE");
         paymentTypeCodeList.add("2");
         paymentTypeNameList.add("DD");
         paymentTypeCodeList.add("3");
-        paymentTypeNameList.add("CASH");
-        paymentTypeCodeList.add("4");
-        paymentTypeNameList.add("NEFT");
-        paymentTypeCodeList.add("5");
-        paymentTypeNameList.add("RTGS");
-        paymentTypeCodeList.add("6");
-        paymentTypeNameList.add("SMS Link");
-        paymentTypeCodeList.add("7");
+//        paymentTypeNameList.add("CASH");
+//        paymentTypeCodeList.add("4");
+//        paymentTypeNameList.add("NEFT");
+//        paymentTypeCodeList.add("5");
+//        paymentTypeNameList.add("RTGS");
+//        paymentTypeCodeList.add("6");
+//        paymentTypeNameList.add("SMS Link");
+//        paymentTypeCodeList.add("7");
         paymentTypeNameList.add("Dynamic QR");
         paymentTypeCodeList.add("8");
         paymentTypeNameList.add("Card");
@@ -1762,6 +1763,30 @@ public class AmountCollectionEntry extends AppCompatActivity {
 
                     switch (paymentType_spinPostion) {
                         case 1:
+                            paymentTypeSelection = "CHEQUE";
+                            enablePaymentSelectedView(1);
+                            break;
+
+                        case 2:
+                            paymentTypeSelection = "DD";
+                            enablePaymentSelectedView(3);
+                            break;
+
+                        case 3:
+                            paymentTypeSelection = "Dynamic QR";
+                            Toast.makeText(AmountCollectionEntry.this,
+                                    "Razorpay Dynamic QR payment", Toast.LENGTH_SHORT).show();
+                            payWithQRCode();
+                            enablePaymentSelectedView(9);
+                            break;
+                        case 4:
+                            paymentTypeSelection = "Card";
+                            Toast.makeText(AmountCollectionEntry.this,
+                                    "Razorpay Card payment", Toast.LENGTH_SHORT).show();
+                            payWithCard();
+                            enablePaymentSelectedView(9);
+                            break;
+                        /*case 1:
                             paymentTypeSelection = "QR";
                             enablePaymentSelectedView(0);
                             break;
@@ -1820,7 +1845,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
 //                            submit_entry_btn.setVisibility(View.VISIBLE);
                             break;
                         default:
-                            break;
+                            break;*/
                     }
 
                 } else {
@@ -2796,7 +2821,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
             Log.d("APP", "Called printing statement");
 
             // Receipt parameters
-            String tollFreeNumber = "18001805821";
+            String tollFreeNumber = "18001234999";
             String currentDate = new java.text.SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").format(new java.util.Date());
             java.util.Calendar calendar = java.util.Calendar.getInstance();
 
@@ -2820,23 +2845,23 @@ public class AmountCollectionEntry extends AppCompatActivity {
             int estimatedHeight = y;
 
             // Pre-calculate height for dynamic content
-//            estimatedHeight += lineSpacing * 3; // For header
-//            estimatedHeight += lineSpacing; // For dashed line
-//            estimatedHeight += lineSpacing * 2; // For Tollfree text and dashed line
+            estimatedHeight += lineSpacing * 3; // For header
+            estimatedHeight += lineSpacing; // For dashed line
+            estimatedHeight += lineSpacing * 2; // For Tollfree text and dashed line
             estimatedHeight += calculateKeyValueHeight("Trans Date", currentDate, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("Trans No", transactionId, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Consumer No", consumerNumber, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Zone", zoneNumber, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Ward", wardName, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Consumer No", consumerNumber, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Zone", zoneNumber, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Ward", wardName, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("House No", houseNumber, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("Name", name, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Mobile No", mobileNumber, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Address", address, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Dues From", duesFrom, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Dues Upto", duesUpto, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += calculateKeyValueHeight("Payment Mode", paymentMode, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Mobile No", mobileNumber, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Address", address, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Dues From", duesFrom, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Dues Upto", duesUpto, paint, bitmapWidth, lineSpacing);
+            estimatedHeight += calculateKeyValueHeight("Payment Mode", paymentMode, paint, bitmapWidth, lineSpacing);
             estimatedHeight += calculateKeyValueHeight("Amount Paid", "Rs. " + amountPaid, paint, bitmapWidth, lineSpacing);
-//            estimatedHeight += lineSpacing * 7; // Footer
+            estimatedHeight += lineSpacing * 7; // Footer
 
             // Create Bitmap with calculated height
             Bitmap receiptBitmap = Bitmap.createBitmap(bitmapWidth, estimatedHeight, Bitmap.Config.ARGB_8888);
@@ -2844,7 +2869,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
             canvas.drawColor(Color.WHITE);
 
             // Draw Header
-            /*paint.setTextSize(24);
+            paint.setTextSize(24);
             paint.setTypeface(Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD));
             drawCenteredText(canvas, "Lucknow Municipal Corporation", paint, y, lineSpacing);
             y += lineSpacing;
@@ -2865,24 +2890,24 @@ public class AmountCollectionEntry extends AppCompatActivity {
 
             // Dashed line below Tollfree
             drawDashedLine(canvas, paint, bitmapWidth, y);
-            y += lineSpacing;*/
+            y += lineSpacing;
 
             // Draw Key-Value Pairs
             y = drawKeyValue(canvas, "Trans Date", currentDate, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "Trans No", transactionId, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Consumer No", consumerNumber, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Zone", zoneNumber, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Ward", wardName, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Consumer No", consumerNumber, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Zone", zoneNumber, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Ward", wardName, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "House No", houseNumber, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "Name", name, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Mobile No", mobileNumber, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Address", address, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Dues From", duesFrom, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Dues Upto", duesUpto, paint, bitmapWidth, y, lineSpacing);
-//            y = drawKeyValue(canvas, "Payment Mode", paymentMode, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Mobile No", mobileNumber, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Address", address, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Dues From", duesFrom, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Dues Upto", duesUpto, paint, bitmapWidth, y, lineSpacing);
+            y = drawKeyValue(canvas, "Payment Mode", paymentMode, paint, bitmapWidth, y, lineSpacing);
             y = drawKeyValue(canvas, "Amount Paid", "Rs. " + amountPaid, paint, bitmapWidth, y, lineSpacing);
 
-            /*drawDashedLine(canvas, paint, bitmapWidth, y);
+            drawDashedLine(canvas, paint, bitmapWidth, y);
             y += lineSpacing;
 
             y = drawKeyValue(canvas, "TC Name", collectorName, paint, bitmapWidth, y, lineSpacing);
@@ -2898,7 +2923,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
             y += lineSpacing;
             drawCenteredText(canvas, "https://www.lucknowsmartcity.com", paint, y, lineSpacing);
             y += lineSpacing;
-            drawCenteredText(canvas, "Thank you!", paint, y, lineSpacing);*/
+            drawCenteredText(canvas, "Thank you!", paint, y, lineSpacing);
 
             // Encode and Print
             String encodedImage = getEncoded64ImageStringFromBitmap(receiptBitmap);
@@ -2924,7 +2949,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
         canvas.drawText(text, (canvas.getWidth() - paint.measureText(text)) / 2, y, paint);
     }
 
-    private int calculateKeyValueHeight(String key, String value, Paint paint, int bitmapWidth, int lineSpacing) {
+    /*private int calculateKeyValueHeight(String key, String value, Paint paint, int bitmapWidth, int lineSpacing) {
         float colonX = bitmapWidth / 2;
         float keyWidth = paint.measureText(key);
         float valueX = colonX + 10;
@@ -2939,6 +2964,16 @@ public class AmountCollectionEntry extends AppCompatActivity {
             totalHeight += lineSpacing;
         }
         return totalHeight;
+    }*/
+    private int calculateKeyValueHeight(String key, String value, Paint paint, int bitmapWidth, int lineSpacing) {
+        float colonX = bitmapWidth / 2;
+        float keyWidth = paint.measureText(key);
+        float valueX = colonX + 10;
+        float maxWidth = bitmapWidth - valueX;
+
+        // Calculate how many characters fit in one line
+        int charsToFit = paint.breakText(value, true, maxWidth, null);
+        return lineSpacing; // Only one line is considered
     }
 
     private String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
@@ -2954,7 +2989,7 @@ public class AmountCollectionEntry extends AppCompatActivity {
     }
 
     // Updated drawKeyValue
-    private int drawKeyValue(Canvas canvas, String key, String value, Paint paint, int bitmapWidth, int y, int lineSpacing) {
+    /*private int drawKeyValue(Canvas canvas, String key, String value, Paint paint, int bitmapWidth, int y, int lineSpacing) {
         float colonX = bitmapWidth / 2;
         float keyWidth = paint.measureText(key);
         float keyX = colonX - keyWidth - 10;
@@ -2987,6 +3022,27 @@ public class AmountCollectionEntry extends AppCompatActivity {
         }
 
         return y;
+    }*/
+    private int drawKeyValue(Canvas canvas, String key, String value, Paint paint, int bitmapWidth, int y, int lineSpacing) {
+        float colonX = bitmapWidth / 2;
+        float keyWidth = paint.measureText(key);
+        float keyX = colonX - keyWidth - 10;
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText(key, keyX, y, paint);
+        canvas.drawText(":", colonX, y, paint);
+
+        float valueX = colonX + 10;
+        float maxWidth = bitmapWidth - valueX;
+
+        // Extract only the first line of text that fits
+        int charsToFit = paint.breakText(value, true, maxWidth, null);
+        String textToDraw = value.substring(0, charsToFit).trim();
+
+        // Draw the first line of text
+        canvas.drawText(textToDraw, valueX, y, paint);
+
+        return y + lineSpacing; // Move to next line
     }
 
 
